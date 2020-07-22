@@ -9,8 +9,13 @@ MineButton::~MineButton()
 
 void MineButton::mousePressEvent(QMouseEvent *e)
 {
+    qDebug("12345");
     int buttons = e->buttons();             //Qt::MouseButtons enum or
     if(buttons == Qt::LeftButton)emit leftClick();
-    if(buttons == Qt::RightButton)emit rightClick();
-    if(buttons == Qt::LeftButton + Qt::RightButton)emit bothClick();
+    else if(buttons == Qt::RightButton)emit rightClick();
+    else if(buttons == (Qt::LeftButton | Qt::RightButton))
+    {
+        qDebug("left and right");
+        emit bothClick();
+    }
 }

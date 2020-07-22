@@ -181,8 +181,9 @@ void GamePage::left()
                 find = true;
                 break;
             }
-        if(find)break;
+        if(find) break;
     }
+    if (state[x][y] != 0) return;
     if(start == false)
     {
         start = true;
@@ -203,7 +204,7 @@ void GamePage::left()
     {
         numOfClicked++;
         state[x][y] = 1;
-        mines[x][y].setDisabled(true);
+        //mines[x][y].setDisabled(true);
         mines[x][y].setText(QString::number(num));
         mines[x][y].setStyleSheet("background-color:rgb(190,190,190);");
     }
@@ -223,8 +224,9 @@ void GamePage::right()
                 find = true;
                 break;
             }
-        if(find)break;
+        if(find) break;
     }
+    if (state[x][y] == 1) return;
     if(start == false)
     {
         start = true;
@@ -266,6 +268,7 @@ void GamePage::both()
             }
         if(find)break;
     }
+    if (state[x][y] != 1) return;
     int numOfFlags = 0;
     for(int i = (x - 1 >= 0 ? x - 1 : 0); i < (x + 2 <= height ? x + 2 : height); i++)
         for(int j = (y - 1 >= 0 ? y - 1 : 0); j < (y + 2 <= width ? y + 2 : width); j++)
@@ -290,7 +293,7 @@ void GamePage::both()
                     {
                         mines[i][j].setText(QString::number(mineDisrtibution[i][j]));
                         numOfClicked++;
-                        mines[i][j].setDisabled(true);
+                        //mines[i][j].setDisabled(true);
                     }
                     else spread(i,j);
                 }
@@ -302,7 +305,7 @@ void GamePage::spread(int x, int y)
 {
     state[x][y] = 1;
     numOfClicked++;
-    mines[x][y].setDisabled(true);
+    //mines[x][y].setDisabled(true);
     mines[x][y].setStyleSheet("background-color:rgb(190,190,190);");
     for(int i = (x - 1 >= 0 ? x - 1 : 0); i < (x + 2 <= height ? x + 2 : height); i++)
         for(int j = (y - 1 >= 0 ? y - 1 : 0); j < (y + 2 <= width ? y + 2 : width); j++)
@@ -313,7 +316,7 @@ void GamePage::spread(int x, int y)
             {
                 state[i][j] = 1;
                 numOfClicked++;
-                mines[i][j].setDisabled(true);
+                //mines[i][j].setDisabled(true);
                 mines[i][j].setText(QString::number(mineDisrtibution[i][j]));
                 mines[i][j].setStyleSheet("background-color:rgb(190,190,190);");
             }
